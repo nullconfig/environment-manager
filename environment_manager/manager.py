@@ -12,7 +12,7 @@ from environment_manager import PackageManager as pm
 from environment_manager import DotfileManager as dm
 
 HERE = path.abspath(path.dirname(__file__))
-HOMEDIR = os.environ.get("HOME")
+
 FILES = [
   "aliases",
   "zshrc",
@@ -36,12 +36,16 @@ def cmd_parser():
 
 def main():
   arguments = cmd_parser()
-  os.system(f"rsync -avr {HERE}/../dotfiles {HOMEDIR}")
+
+  os.system(f"rsync -avr {HERE}/../dotfiles {arguments.homedir}")
+  os.system(f"rsync -avr {HERE}/../environment_manager /usr/bin/")
+  os.system(f"chmod +x /usr/bin/environment_manager/manager.py")
+  os.system(f"ln -s /usr/bin/environment_manager/manager.py /usr/bin/environment-manager")
 
   if arguments.package_manager:
     pm.install_packages(vars(arguments)["package_manager"])
   if arguments.homedir:
-    dm(HOMEDIR, FILES)
+    dm(arguments.homedir, FILES)
 
 if __name__ == "__main__":
   main()

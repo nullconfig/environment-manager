@@ -1,4 +1,4 @@
-alias dotfile-update='python3 $HOME/dotfiles/package_manager/maintainer.py -hd $HOME -pm brew'
+alias env-update='environment-manager -hd <FULLPATH_TO_DIRECTORY> -pm apt'
 
 # Shortcuts
 alias ch='history | grep "git commit"'
