@@ -38,9 +38,9 @@ def main():
   arguments = cmd_parser()
 
   os.system(f"rsync -avr {HERE}/../dotfiles {arguments.homedir}")
-  os.system(f"rsync -avr {HERE}/../environment_manager /usr/bin/")
-  os.system(f"chmod +x /usr/bin/environment_manager/manager.py")
-  os.system(f"ln -s /usr/bin/environment_manager/manager.py /usr/bin/environment-manager")
+  os.system(f"rsync -avr --exclude .git --exclude .gitignore {HERE}/../environment_manager {arguments.homedir}")
+  os.system(f"chmod +x {arguments.homedir}/environment_manager/manager.py")
+  os.system(f"ln -s {arguments.homedir}/environment_manager/manager.py /usr/bin/environment-manager")
 
   if arguments.package_manager:
     pm.install_packages(vars(arguments)["package_manager"])

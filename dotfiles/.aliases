@@ -1,4 +1,4 @@
-alias env-update='environment-manager -hd <FULLPATH_TO_DIRECTORY> -pm apt'
+alias env-update='environment-manager -hd $HOME -pm apt'
 
 # Shortcuts
 alias ch='history | grep "git commit"'
