@@ -8,11 +8,10 @@ and also installs Homebrew Packages.
 import argparse, os
 from os import path
 
-from environment_manager import PackageManager as pm
-from environment_manager import DotfileManager as dm
+from environment_manager.environment_manager import PackageManager as pm
+from environment_manager.environment_manager import DotfileManager as dm
 
-HERE = path.abspath(path.dirname(__file__))
-
+# ensure the files in this list are relevant your shell
 FILES = [
   "aliases",
   "zshrc",
@@ -28,23 +27,21 @@ def cmd_parser():
   parser.add_argument('-hd', '--homedir', 
                       help="Full path to your home directory", 
                       required=True)
+
   parser.add_argument('-pm', '--package-manager', 
-                      help="Linux package manager", 
-                      required=False)
+                      help="package manager relevant to your operating system", 
+                      required=True)
 
   return parser.parse_args()
 
 def main():
   arguments = cmd_parser()
 
-  os.system(f"rsync -avr {HERE}/../dotfiles {arguments.homedir}")
-  os.system(f"rsync -avr --exclude .git --exclude .gitignore {HERE}/../environment_manager {arguments.homedir}")
-  os.system(f"chmod +x {arguments.homedir}/environment_manager/manager.py")
-  os.system(f"ln -s {arguments.homedir}/environment_manager/manager.py /usr/bin/environment-manager")
-
   if arguments.package_manager:
     pm.install_packages(vars(arguments)["package_manager"])
-  if arguments.homedir:
+    # If your user requires sudo access to install packages
+    # you'll need to rerun this without sudo to correct the 
+    # owner of the dotfiles in your home directory
     dm(arguments.homedir, FILES)
 
 if __name__ == "__main__":

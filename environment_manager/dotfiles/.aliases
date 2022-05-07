@@ -1,4 +1,4 @@
-alias env-update='environment-manager -hd $HOME -pm apt'
+alias env-update='. $HOME/.bashrc'
 
 # Shortcuts
 alias ch='history | grep "git commit"'

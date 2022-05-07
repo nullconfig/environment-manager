@@ -4,8 +4,7 @@ import os
 # the applications you want to install or 
 # match the pattern and add the package manager
 # relevant to your operating system
-from packages import apt_packages
-from packages import brew_packages
+from .packages import apt_packages, brew_packages
 
 install_once = {
     "tunnelblick": {"mac_app": "Tunnelblick.app"},
@@ -37,7 +36,7 @@ class DotfileManager:
     self.files = files
 
     if self.homedir:
-      dotfiledir = f"{self.homedir}/dotfiles"
+      dotfiledir = f"{self.homedir}/environment-manager/environment_manager/dotfiles"
 
       for file in files:
         try:
