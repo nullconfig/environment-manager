@@ -1,4 +1,4 @@
-alias env-update='. $HOME/.bashrc'
+alias env-update='. $HOME/.bashrc && . $HOME/.aliases'
 
 # Shortcuts
 alias ch='history | grep "git commit"'
@@ -32,8 +32,16 @@ alias update_system='sudo softwareupdate -i -a'
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
 alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
 
-# Use this if you are not running docker
-alias docker='lima nerdctl'
+# Use this if you are not running docker on a mac
+# alias docker='lima nerdctl'
 # provided as an example of running containers as an alias 
 # versus installing an application or python dependencies globally
 alias ansible='docker run --rm -it -v ~/.aws:/root/.aws -v ~/.vault:/root/.vault -v ~/.ssh/keys:/root/.ssh/keys -v $(PWD):/opt/ansible ansible-2.9'
+alias ansible-shell='docker run --rm -it -v ~/.aws:/root/.aws -v ~/.vault:/root/.vault -v ~/.ssh/keys:/root/.ssh/keys --entrypoint /bin/sh -v $(pwd):/opt/ansible ansible-2.9'
+
+# Aliases based on articles from https://nullconfig.com
+alias github-bot='/usr/bin/docker run --rm -it github-bot'
+alias github-bot-shell='/usr/bin/docker run --rm -it --entrypoint /bin/sh github-bot'
+alias github-api='/usr/bin/docker run --rm -it -p 8000:8000 -p 9001:9001 github-api'
+alias github-api-shell='/usr/bin/docker run --rm -it -p 8000:8000 -p 9001:9001 --entrypoint /bin/sh github-api'
+alias python-cli-utility='/usr/bin/docker run --rm -it python-cli-utility'

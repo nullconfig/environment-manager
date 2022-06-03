@@ -11,7 +11,7 @@ apps = [
     "tunnelblick",
     "google-cloud-sdk",
     "awscli",
-    "visual-studio-code",
+    "vscodium",
     "virtualbox",
     "vlc",
     "gron",
